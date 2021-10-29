@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:state_management/providers/Product.dart';
 import 'package:state_management/providers/Products.dart';
 
-class ProductDetailWidget extends StatelessWidget {
+class ProductItemDetailWidget extends StatelessWidget {
   static final String routeName = '/product-detail';
 
   @override
@@ -16,8 +16,38 @@ class ProductDetailWidget extends StatelessWidget {
       appBar: AppBar(
         title: Text(product.title),
       ),
-      body: Center(
-        child: Text("Inside the product detail"),
+      body: Column(
+        children: [
+          Container(
+            height: 300,
+            width: double.infinity,
+            child: Image.network(
+              product.imageUrl,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: 350,
+            height: 50,
+            child: FittedBox(
+              child: Text(
+                "${product.description}",
+                style: TextStyle(fontSize: 20),
+                softWrap: true,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            "\$${product.price}",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+          ),
+        ],
       ),
     );
   }
