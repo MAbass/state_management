@@ -46,11 +46,13 @@ class Products with ChangeNotifier {
     }
     return _items;
   }
-  void showFavorites(){
+
+  void showFavorites() {
     _selectedFavorites = true;
     notifyListeners();
   }
-  void showAll(){
+
+  void showAll() {
     _selectedFavorites = false;
     notifyListeners();
   }
@@ -59,8 +61,21 @@ class Products with ChangeNotifier {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
-  void _addProduct(Product product) {
+  void addProduct(Product product) {
     _items.add(product);
+    notifyListeners();
+  }
+
+  void updateProduct(String id, Product productChange) {
+    int productIndex = _items.indexWhere((prod) => prod.id == id);
+    if (productIndex >= 0) {
+      _items[productIndex] = productChange;
+    }
+    notifyListeners();
+  }
+
+  void deleteProduct(String id) {
+    _items.removeWhere((element) => element.id == id);
     notifyListeners();
   }
 }
