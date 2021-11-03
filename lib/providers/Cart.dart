@@ -7,11 +7,16 @@ class CartItem {
   int quantity = 0;
   double price = 0.0;
 
-  CartItem(String id, String title, int quantity, double price) {
+  CartItem(@required String id, @required String title, @required int quantity,
+      @required double price) {
     this.id = id;
     this.title = title;
     this.quantity = quantity;
     this.price = price;
+  }
+
+  String toString() {
+    return "Id: ${this.id}, title: ${this.title}, quantity:${this.quantity} and price:${this.price}";
   }
 }
 

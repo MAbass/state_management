@@ -10,6 +10,10 @@ class UserProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _onRefresh(BuildContext context) async {
+      await Provider.of<Products>(context, listen: false).fetchAllProducts();
+    }
+
     final productsData = Provider.of<Products>(context);
     return Scaffold(
       appBar: AppBar(
@@ -23,19 +27,23 @@ class UserProductScreen extends StatelessWidget {
         ],
       ),
       drawer: AppDrawer(),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: ListView.builder(
-            itemCount: productsData.items.length,
-            itemBuilder: (ctx, index) {
-              return UserProductItem(
-                  productsData.items[index].id,
-                  productsData.items[index].title,
-                  productsData.items[index].imageUrl,
-                  productsData.items[index].price,
-                  productsData.items[index].description
-              );
-            }),
+      body: RefreshIndicator(
+        onRefresh: () {
+          return _onRefresh(context);
+        },
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: ListView.builder(
+              itemCount: productsData.items.length,
+              itemBuilder: (ctx, index) {
+                return UserProductItem(
+                    productsData.items[index].id,
+                    productsData.items[index].title,
+                    productsData.items[index].imageUrl,
+                    productsData.items[index].price,
+                    productsData.items[index].description);
+              }),
+        ),
       ),
     );
   }

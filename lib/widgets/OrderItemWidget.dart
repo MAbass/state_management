@@ -18,6 +18,7 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // print(widget.orderItem);
     return Card(
       margin: EdgeInsets.all(10),
       child: Column(
@@ -27,8 +28,9 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
               "Amount total: ${widget.orderItem.amount}",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
-            subtitle: Text(
-                DateFormat.yMMM().format(widget.orderItem.dateTime).toString()),
+            subtitle: Text(DateFormat.yMMM()
+                .format(widget.orderItem.dateTime ?? DateTime.now())
+                .toString()),
             trailing: IconButton(
               icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
               onPressed: () {
@@ -47,14 +49,33 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        product.title,
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text("${product.quantity}x \$${product.price}",
+                      Expanded(
+                        flex: 6,
+                        child: Text(
+                          product.title,
                           style: TextStyle(
-                              fontSize: 18, color: Colors.grey))
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text("${product.quantity}x",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold)),
+                            SizedBox(
+                              width: 2,
+                            ),
+                            Text("\$${product.price}",
+                                style:
+                                    TextStyle(fontSize: 18, color: Colors.grey))
+                          ],
+                        ),
+                      )
                     ],
                   );
                 }).toList(),
