@@ -12,7 +12,7 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  late Future _future;
+  Future _future;
 
   Future _obtainsFuture() {
     return Provider.of<Orders>(context, listen: false).fetchAllOrders();
@@ -46,10 +46,10 @@ class _OrderScreenState extends State<OrderScreen> {
             return Consumer<Orders>(
               builder: (ctx, orderData, child) {
                 return ListView.builder(
-                    itemCount: orderData.orders!.length,
+                    itemCount: orderData.orders.length,
                     itemBuilder: (ctx, index) {
-                      print((orderData.orders![index]));
-                      return OrderItemWidget((orderData.orders![index]));
+                      print((orderData.orders[index]));
+                      return OrderItemWidget((orderData.orders[index]));
                     });
               },
             );

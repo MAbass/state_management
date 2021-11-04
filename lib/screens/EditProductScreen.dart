@@ -17,8 +17,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imageURLFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-  var product = Product(
-      id: "", title: "", description: "", price: 0, imageUrl: "");
+  var product =
+      Product(id: "", title: "", description: "", price: 0, imageUrl: "");
 
 /*
   final _titleFocusNode = FocusNode();
@@ -40,8 +40,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   void didChangeDependencies() {
-    if (ModalRoute.of(context)!.settings.arguments != null) {
-      final arguments = ModalRoute.of(context)!.settings.arguments as Map;
+    if (ModalRoute.of(context).settings.arguments != null) {
+      final arguments = ModalRoute.of(context).settings.arguments as Map;
       debugPrint(arguments.toString());
       String id = "";
       id = arguments["id"];
@@ -70,15 +70,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   Future<void> _saveForm() async {
-    final _isValid = _formKey.currentState!.validate();
+    final _isValid = _formKey.currentState.validate();
     if (!_isValid) {
       return;
     }
     setState(() {
       _isLoading = true;
     });
-    _formKey.currentState!.save();
-    if (ModalRoute.of(context)!.settings.arguments != null) {
+    _formKey.currentState.save();
+    if (ModalRoute.of(context).settings.arguments != null) {
       Product productChange = new Product(
           id: _initValues["id"],
           title: product.title,
@@ -147,7 +147,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     // focusNode: _titleFocusNode,
                     textInputAction: TextInputAction.next,
                     validator: (value) {
-                      if (value!.isEmpty) {
+                      if (value.isEmpty) {
                         return "Provide the title";
                       }
                       return null;
@@ -178,7 +178,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.number,
                     validator: (value) {
-                      if (value!.isEmpty) {
+                      if (value.isEmpty) {
                         return "Please provide a value";
                       }
                       if (double.parse(value) == null) {
@@ -207,7 +207,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     maxLines: 3,
                     keyboardType: TextInputType.multiline,
                     validator: (value) {
-                      if (value!.isEmpty) {
+                      if (value.isEmpty) {
                         return "Please provide a value";
                       }
                       if (value.length < 5) {

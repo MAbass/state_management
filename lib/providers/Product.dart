@@ -12,14 +12,14 @@ class Product with ChangeNotifier {
   bool isFavorite;
 
   Product(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.price,
-      required this.imageUrl,
+      {@required this.id,
+      @required this.title,
+      @required this.description,
+      @required this.price,
+      @required this.imageUrl,
       this.isFavorite = false});
 
-  Future<void> toggleFavoriteStatus(String? authToken, String? userId) async {
+  Future<void> toggleFavoriteStatus(String authToken, String userId) async {
     var url = Uri.parse(
         "https://flutter-test-e953f-default-rtdb.firebaseio.com/userProducts/$userId/$id.json?auth=${authToken}");
     await http.put(url, body: json.encode(isFavorite)).then((value) {

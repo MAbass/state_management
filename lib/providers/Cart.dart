@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:random_string/random_string.dart';
 
 class CartItem {
-  String id = "";
-  String title = "";
-  int quantity = 0;
-  double price = 0.0;
+  String id ;
+  String title;
+  int quantity;
+  double price;
 
   CartItem(@required String id, @required String title, @required int quantity,
       @required double price) {
@@ -43,7 +43,7 @@ class Cart with ChangeNotifier {
       String productId, String title, int quantity, double price) {
     int lastQuantity = 1;
     if (_items.containsKey(productId)) {
-      lastQuantity = _items[productId]!.quantity;
+      lastQuantity = _items[productId].quantity;
       _items.update(productId,
           (value) => CartItem(value.id, title, lastQuantity + quantity, price));
     } else {
@@ -57,7 +57,7 @@ class Cart with ChangeNotifier {
     if (!_items.containsKey(productId)) {
       return;
     }
-    if (_items[productId]!.quantity > 1) {
+    if (_items[productId].quantity > 1) {
       _items.update(
           productId,
           (existingCartItem) => CartItem(
@@ -66,7 +66,7 @@ class Cart with ChangeNotifier {
               existingCartItem.quantity - 1,
               existingCartItem.price));
     }
-    if (_items[productId]!.quantity == 1) {
+    if (_items[productId].quantity == 1) {
       _items.remove(productId);
     }
     notifyListeners();

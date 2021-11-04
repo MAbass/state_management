@@ -6,9 +6,9 @@ import 'package:state_management/exception/HttpException.dart';
 import '';
 
 class Auth with ChangeNotifier {
-  String? _token = null;
-  DateTime _expiryDate = DateTime.now();
-  String? _user_id;
+  String _token ;
+  DateTime _expiryDate ;
+  String _user_id;
 
   bool get isAuth {
     // print("Auth value: ${_token}");
@@ -16,14 +16,14 @@ class Auth with ChangeNotifier {
     return _token != null;
   }
 
-  String? get userId {
+  String get userId {
     if (_user_id != null) {
       return _user_id;
     }
     return null;
   }
 
-  String? get token {
+  String get token {
     if (_expiryDate != null &&
         _expiryDate.isAfter(DateTime.now()) &&
         _token != null) {

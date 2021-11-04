@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future _future;
+  Future _future;
 
   Future _obtainsFuture() {
     return Provider.of<Products>(context, listen: false).fetchAllProducts();
@@ -58,9 +58,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ]),
             Consumer<Cart>(
-              builder: (BuildContext context, cart, Widget? childwidget) {
+              builder: (BuildContext context, cart, Widget childwidget) {
                 return BadgeWidget(
-                    childwidget!, cart.itemCount.toString(), Colors.red);
+                    childwidget, cart.itemCount.toString(), Colors.red);
               },
               child: IconButton(
                 icon: Icon(Icons.shopping_cart),

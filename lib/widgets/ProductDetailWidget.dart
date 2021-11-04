@@ -9,7 +9,7 @@ class ProductItemDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final argumentPassed = ModalRoute.of(context)!.settings.arguments as Map;
+    final argumentPassed = ModalRoute.of(context).settings.arguments as Map;
     final productProvider = Provider.of<Products>(context, listen: false);
     final Product product = productProvider.findById(argumentPassed['id']);
     return Scaffold(

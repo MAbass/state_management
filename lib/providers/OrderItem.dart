@@ -8,13 +8,13 @@ import 'package:http/http.dart' as http;
 import 'User.dart';
 
 class OrderItem {
-  String? id;
+  String id;
 
-  double? amount;
+  double amount;
   List<CartItem> products = [];
 
-  DateTime? dateTime = DateTime.now();
-  Auth? auth;
+  DateTime dateTime;
+  Auth auth;
 
   OrderItem(String id, double amount, List<CartItem> products) {
     this.id = id;
@@ -33,11 +33,11 @@ class OrderItem {
 
 class Orders with ChangeNotifier {
   List<OrderItem> _orders = [];
-  Auth? auth;
+  Auth auth;
 
   Orders(this.auth);
 
-  List<OrderItem>? get orders {
+  List<OrderItem> get orders {
     return _orders;
   }
 
@@ -45,7 +45,7 @@ class Orders with ChangeNotifier {
     _orders = [];
     // print("Size of _orders:${_orders.length}");
     var url = Uri.parse(
-        "https://flutter-test-e953f-default-rtdb.firebaseio.com/orders.json?auth=${auth!.token}");
+        "https://flutter-test-e953f-default-rtdb.firebaseio.com/orders.json?auth=${auth.token}");
 
     final listOfOrders = await http.get(url);
     final result = json.decode(listOfOrders.body) as Map<String, dynamic>;
@@ -69,7 +69,7 @@ class Orders with ChangeNotifier {
 
   Future<void> addOrder(List<CartItem> cartItems, double total) async {
     var url = Uri.parse(
-        "https://flutter-test-e953f-default-rtdb.firebaseio.com/orders.json?auth=${auth!.token}");
+        "https://flutter-test-e953f-default-rtdb.firebaseio.com/orders.json?auth=${auth.token}");
     await http
         .post(url,
             body: json.encode({

@@ -38,11 +38,11 @@ class _AuthCardWidgetState extends State<AuthCardWidget> {
   }
 
   Future<void> _submit() async {
-    if (!_formKey.currentState!.validate()) {
+    if (!_formKey.currentState.validate()) {
       // Invalid!
       return;
     }
-    _formKey.currentState!.save();
+    _formKey.currentState.save();
     setState(() {
       _isLoading = true;
     });
@@ -118,13 +118,13 @@ class _AuthCardWidgetState extends State<AuthCardWidget> {
                   decoration: InputDecoration(labelText: 'E-Mail'),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value!.isEmpty || !value.contains('@')) {
+                    if (value.isEmpty || !value.contains('@')) {
                       return 'Invalid email!';
                     }
                     return null;
                   },
                   onSaved: (value) {
-                    _authData['email'] = value!;
+                    _authData['email'] = value;
                   },
                 ),
                 TextFormField(
@@ -132,12 +132,12 @@ class _AuthCardWidgetState extends State<AuthCardWidget> {
                   obscureText: true,
                   controller: _passwordController,
                   validator: (value) {
-                    if (value!.isEmpty || value.length < 5) {
+                    if (value.isEmpty || value.length < 5) {
                       return 'Password is too short!';
                     }
                   },
                   onSaved: (value) {
-                    _authData['password'] = value!;
+                    _authData['password'] = value;
                   },
                 ),
                 if (_authMode == AuthMode.Signup)
@@ -174,7 +174,7 @@ class _AuthCardWidgetState extends State<AuthCardWidget> {
                     textColor: Theme
                         .of(context)
                         .primaryTextTheme
-                        .button!
+                        .button
                         .color,
                   ),
                 FlatButton(
